@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 
 services:
 
@@ -11,6 +11,8 @@ services:
     command: mysqld --sql_mode=""
     volumes:
       - ./db:/var/lib/mysql
+    ports:
+      - 3304:3306
 
   phpmyadmin:
       image: phpmyadmin/phpmyadmin

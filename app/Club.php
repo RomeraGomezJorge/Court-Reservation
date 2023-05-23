@@ -47,4 +47,9 @@ class Club extends Model
         "twitter",
 
     ];
+
+    public function courts()
+    {
+        $this->hasMany(Court::class);
+    }
 }

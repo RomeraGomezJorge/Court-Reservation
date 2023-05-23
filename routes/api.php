@@ -13,9 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
-Route::apiResource( 'club', 'Api\ClubController');
+
+Route::prefix('backoffice')->group(
+    function () {
+        Route::apiResource('club', 'Api\ClubController');
+        Route::apiResource('court', 'Api\Backoffice\CourtController');
+    }
+);
+
 

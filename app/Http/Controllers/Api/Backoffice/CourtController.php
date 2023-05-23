@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Backoffice;
 
 use App\Court;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backoffice\Court\StoreRequest as CourtStoreRequest;
-use App\Http\Requests\Backoffice\Court\UpdateRequest as CourtUpdateRequest;
+use App\Http\Requests\Backoffice\Court\StoreRequest as StoreCourtRequest;
+use App\Http\Requests\Backoffice\Court\UpdateRequest as UpdateCourtRequest;
 use Illuminate\Http\JsonResponse;
 
 class CourtController extends Controller
@@ -22,10 +22,10 @@ class CourtController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param CourtStoreRequest $request
+     * @param StoreCourtRequest $request
      * @return JsonResponse
      */
-    public function store(CourtStoreRequest $request)
+    public function store(StoreCourtRequest $request)
     {
         Court::create($request->validated());
         return response()->json(['message' => 'Data stored successfully'], 201);
@@ -45,11 +45,11 @@ class CourtController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param CourtUpdateRequest $request
+     * @param UpdateCourtRequest $request
      * @param Court              $court
      * @return JsonResponse
      */
-    public function update(CourtUpdateRequest $request, Court $court)
+    public function update(UpdateCourtRequest $request, Court $court)
     {
         $court->update($request->validated());
         return response()->json(['message' => 'Data updated successfully']);

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Backoffice;
 
 use App\Club;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreClubRequest;
-use App\Http\Requests\UpdateClubRequest;
+use App\Http\Requests\Backoffice\Club\StoreRequest as StoreClubRequest;
+use App\Http\Requests\Backoffice\Club\UpdateRequest as UpdateClubRequest;
+use Illuminate\Http\JsonResponse;
 
 class ClubController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
@@ -23,7 +24,7 @@ class ClubController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreClubRequest $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function store(StoreClubRequest $request)
     {
@@ -35,12 +36,11 @@ class ClubController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Club $club
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(Club $club)
     {
-        $club = Club::findOrFail($id);
         return response()->json($club);
     }
 
@@ -48,31 +48,23 @@ class ClubController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateClubRequest $request
-     * @param int               $id
-     * @return \Illuminate\Http\Response
+     * @param Club              $club
+     * @return JsonResponse
      */
-    public function update(UpdateClubRequest $request, $id)
+    public function update(UpdateClubRequest $request, Club $club)
     {
-        $club = Club::find($id);
-
-        if (! $club) {
-            return response()->json(['error' => 'Club not found'], 404);
-        }
-
         $club->update($request->validated());
-
         return response()->json(['message' => 'Data updated successfully']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Club $club
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Club $club)
     {
-        $club = Club::findOrFail($id);
         $club->delete();
         return response()->json(null, 204);
     }

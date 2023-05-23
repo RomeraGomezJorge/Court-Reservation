@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 
 Route::prefix('backoffice')->group(
     function () {
-        Route::apiResource('club', 'Api\ClubController');
+        Route::apiResource('club', 'Api\Backoffice\ClubController');
         Route::apiResource('court', 'Api\Backoffice\CourtController');
     }
 );

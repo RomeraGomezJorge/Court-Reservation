@@ -18,10 +18,15 @@ use Illuminate\Http\Request;
 //});
 
 
-Route::prefix('backoffice')->group(
+Route::group(
+    [
+        'prefix'    => 'backoffice',
+        'namespace' => 'Api\Backoffice'
+    ],
     function () {
-        Route::apiResource('club', 'Api\Backoffice\ClubController');
-        Route::apiResource('court', 'Api\Backoffice\CourtController');
+        Route::apiResource('club', 'ClubController');
+        Route::apiResource('court', 'CourtController');
+        Route::apiResource('reserve', 'ReserveController');
     }
 );
 

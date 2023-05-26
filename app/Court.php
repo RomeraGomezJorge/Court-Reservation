@@ -17,4 +17,9 @@ class Court extends Model
     {
         $this->belongsTo(Club::class);
     }
+
+    public function reserves()
+    {
+        $this->hasMany('reserves');
+    }
 }

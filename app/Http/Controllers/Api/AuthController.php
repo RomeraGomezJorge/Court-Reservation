@@ -36,6 +36,7 @@ class AuthController extends Controller
                     'name'    => $data['club_name'],
                     'address' => $data['address'],
                     'phone'   => $data['phone'],
+                    'user_id' => $user->id,
                 ]
             );
         }

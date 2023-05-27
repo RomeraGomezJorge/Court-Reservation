@@ -30,7 +30,6 @@ class UpdateRequest extends BaseFormRequest
         return [
             'name'      => ['sometimes', Rule::unique('clubs')->ignore($id)],
             'address'   => ['sometimes'],
-            'email'     => ['nullable', 'email', Rule::unique('clubs')->ignore($id)],
             'facebook'  => ['nullable', 'url', Rule::unique('clubs')->ignore($id, 'facebook')],
             'instagram' => ['nullable', 'url', Rule::unique('clubs')->ignore($id, 'instagram')],
             'twitter'   => ['nullable', 'url', Rule::unique('clubs')->ignore($id, 'twitter')],

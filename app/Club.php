@@ -15,10 +15,16 @@ class Club extends Model
         "facebook",
         "instagram",
         "twitter",
+        "user_id",
     ];
 
     public function courts()
     {
         $this->hasMany(Court::class);
+    }
+
+    public function user()
+    {
+        $this->belongsTo(User::class);
     }
 }

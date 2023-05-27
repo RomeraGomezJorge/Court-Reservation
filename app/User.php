@@ -24,6 +24,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function club()
+    {
+        return $this->hasOne(Club::class);
+    }
 
     protected static function boot()
     {

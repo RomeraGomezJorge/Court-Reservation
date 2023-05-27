@@ -18,7 +18,7 @@ Route::group(['middleware' => 'auth:sanctum', ],function () {
                 'prefix'     => 'backoffice',
                 'namespace'  => 'Api\Backoffice',
             ],function () {
-                Route::apiResource('club', 'ClubController');
+                Route::apiResource('club', 'ClubController')->only(['show','update']);
                 Route::apiResource('court', 'CourtController');
                 Route::apiResource('reserve', 'ReserveController');
             }

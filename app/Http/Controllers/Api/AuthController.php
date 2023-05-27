@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Club;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
@@ -19,7 +20,25 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validated());
+        $data = $request->validated();
+
+        $user = User::create(
+            [
+                'name'     => $data['name'],
+                'email'    => $data['email'],
+                'password' => $data['password'],
+            ]
+        );
+
+        if ($user->wasRecentlyCreated) {
+            Club::create(
+                [
+                    'name'    => $data['club_name'],
+                    'address' => $data['address'],
+                    'phone'   => $data['phone'],
+                ]
+            );
+        }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 

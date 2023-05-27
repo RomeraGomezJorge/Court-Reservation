@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Backoffice\Club;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 use Illuminate\Validation\Rule;
 
 
-class UpdateRequest extends FormRequest
+class UpdateRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -20,6 +20,8 @@ class CreateCourtsTable extends Migration
             $table->integer('players_number')->nullable();
             $table->unsignedBigInteger('club_id');
             $table->foreign('club_id')->references('id')->on('clubs');
+            $table->unsignedBigInteger('created_by_id');
+            $table->foreign('created_by_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
+use App\Club;
+use App\Court;
+use App\Policies\ClubPolicy;
+use App\Policies\CourtPolicy;
+use App\Policies\ReservePolicy;
+use App\Reserve;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +18,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        Club::class    => ClubPolicy::class,
+        Court::class   => CourtPolicy::class,
+        Reserve::class => ReservePolicy::class,
     ];
 
     /**

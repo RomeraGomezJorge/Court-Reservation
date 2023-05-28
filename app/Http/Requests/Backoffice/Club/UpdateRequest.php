@@ -25,14 +25,14 @@ class UpdateRequest extends BaseFormRequest
      */
     public function rules()
     {
-        $id = $this->route('id');
+        $id = $this->route('club')->id;
 
         return [
-            'name'      => ['sometimes', Rule::unique('clubs')->ignore($id)],
+            'name'      => ['sometimes','unique:clubs,name,' .$id],
             'address'   => ['sometimes'],
-            'facebook'  => ['nullable', 'url', Rule::unique('clubs')->ignore($id, 'facebook')],
-            'instagram' => ['nullable', 'url', Rule::unique('clubs')->ignore($id, 'instagram')],
-            'twitter'   => ['nullable', 'url', Rule::unique('clubs')->ignore($id, 'twitter')],
+            'facebook'  => ['nullable', 'url', 'unique:clubs,facebook,' .$id],
+            'instagram' => ['nullable', 'url', 'unique:clubs,instagram,' .$id],
+            'twitter'   => ['nullable', 'url', 'unique:clubs,twitter,' .$id],
         ];
     }
 

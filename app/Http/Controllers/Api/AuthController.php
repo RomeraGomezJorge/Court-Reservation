@@ -33,10 +33,10 @@ class AuthController extends Controller
         if ($user->wasRecentlyCreated) {
             Club::create(
                 [
-                    'name'    => $data['club_name'],
-                    'address' => $data['address'],
-                    'phone'   => $data['phone'],
-                    'user_id' => $user->id,
+                    'name'          => $data['club_name'],
+                    'address'       => $data['address'],
+                    'phone'         => $data['phone'],
+                    'created_by_id' => $user->id,
                 ]
             );
         }

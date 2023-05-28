@@ -26,7 +26,12 @@ class User extends Authenticatable
 
     public function club()
     {
-        return $this->hasOne(Club::class);
+        return $this->hasOne(Club::class,'created_by_id','id');
+    }
+
+    public function courts()
+    {
+        return $this->hasMany(Court::class,'created_by_id','id');
     }
 
     protected static function boot()

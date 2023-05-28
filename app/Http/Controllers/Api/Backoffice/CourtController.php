@@ -7,9 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backoffice\Court\StoreRequest as StoreCourtRequest;
 use App\Http\Requests\Backoffice\Court\UpdateRequest as UpdateCourtRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class CourtController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Court::class, 'court');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +33,10 @@ class CourtController extends Controller
      */
     public function store(StoreCourtRequest $request)
     {
-        Court::create($request->validated());
+        $validated = $request->validated();
+        $validated['created_by_id'] = Auth::id();
+
+        Court::create($validated);
         return response()->json(['message' => 'Data stored successfully'], 201);
     }
 

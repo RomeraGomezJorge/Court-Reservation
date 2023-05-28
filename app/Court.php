@@ -11,15 +11,21 @@ class Court extends Model
         'number',
         'players_number',
         'club_id',
+        'created_by_id',
     ];
 
     public function club()
     {
-        $this->belongsTo(Club::class);
+        return $this->belongsTo(Club::class);
     }
 
     public function reserves()
     {
-        $this->hasMany('reserves');
+        return $this->hasMany(Reserve::class);
+    }
+
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 }

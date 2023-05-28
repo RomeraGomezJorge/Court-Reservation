@@ -19,7 +19,7 @@ class Reserve extends Model
 
     public function court()
     {
-        $this->belongsTo('courts');
+        return $this->belongsTo(Court::class);
     }
 
 

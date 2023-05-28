@@ -11,20 +11,19 @@ class Club extends Model
         "address",
         "google_maps_iframe_location",
         "phone",
-        "email",
         "facebook",
         "instagram",
         "twitter",
-        "user_id",
+        "created_by_id",
     ];
 
     public function courts()
     {
-        $this->hasMany(Court::class);
+        return $this->hasMany(Court::class);
     }
 
-    public function user()
+    public function created_by()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 }

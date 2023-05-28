@@ -9,6 +9,10 @@ use Illuminate\Http\JsonResponse;
 
 class ClubController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Club::class, 'club');
+    }
 
     /**
      * Display the specified resource.

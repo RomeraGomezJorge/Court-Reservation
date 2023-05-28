@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 
 class ReserveController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Reserve::class, 'reserve');
+    }
+
     /**
      * Display a listing of the resource.
      *

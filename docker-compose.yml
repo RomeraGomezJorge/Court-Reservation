@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
     command: mysqld --sql_mode=""
     volumes:
-      - ./db:/var/lib/mysql
+      - .api/db:/var/lib/mysql
     ports:
       - 3304:3306
 
@@ -34,4 +34,4 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./:/var/www/html
+      - ./api:/var/www/html

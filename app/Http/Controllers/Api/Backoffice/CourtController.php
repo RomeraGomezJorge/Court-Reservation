@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backoffice\Court\StoreRequest as StoreCourtRequest;
 use App\Http\Requests\Backoffice\Court\UpdateRequest as UpdateCourtRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CourtController extends Controller
@@ -21,9 +22,13 @@ class CourtController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Court::all());
+        $page = $request->input('page', 1);
+
+        $courts = Court::where('created_by_id', Auth::id())->paginate(10, ['*'], 'page', $page);
+
+        return response()->json($courts);
     }
 
     /**

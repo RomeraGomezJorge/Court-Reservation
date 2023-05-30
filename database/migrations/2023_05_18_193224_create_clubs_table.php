@@ -22,7 +22,7 @@ class CreateClubsTable extends Migration
             $table->string('facebook')->nullable()->unique();
             $table->string('instagram')->nullable()->unique();
             $table->string('twitter')->nullable()->unique();
-            $table->unsignedBigInteger('created_by_id');
+            $table->unsignedBigInteger('created_by_id')->unique();
             $table->foreign('created_by_id')->references('id')->on('users');
             $table->timestamps();
         });

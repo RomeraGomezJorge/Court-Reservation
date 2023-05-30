@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api\Backoffice;
 use App\Http\Requests\Backoffice\Reserve\StoreRequest as StoreReserveRequest;
 use App\Http\Requests\Backoffice\Reserve\UpdateRequest as UpdateReserveRequest;
 use App\Reserve;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReserveController extends Controller
 {
@@ -20,9 +23,15 @@ class ReserveController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Reserve::all());
+        $page = $request->input('page', 1);
+
+        $reserves = Reserve::whereHas('court',function (Builder $query) {
+            $query->where('created_by_id',Auth::id());
+         })->paginate(10, ['*'], 'page', $page);
+
+        return response()->json($reserves);
     }
 
     /**

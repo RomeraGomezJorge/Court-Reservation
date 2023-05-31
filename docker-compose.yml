@@ -7,22 +7,22 @@ services:
     environment:
       PMA_ARBITRARY: 1
       MYSQL_PASSWORD:
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: ${DOCKER_DATABASE_USER}
     command: mysqld --sql_mode=""
     volumes:
-      - .api/db:/var/lib/mysql
+      - ./api/db:/var/lib/mysql
     ports:
-      - 3304:3306
+      - ${DOCKER_MYSQL_PORT}:3306
 
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
       environment:
         PMA_ARBITRARY: 1
-        MYSQL_USER: root
+        MYSQL_USER: ${DOCKER_DATABASE_USER}
         MYSQL_PASSWORD:
-        MYSQL_ROOT_PASSWORD: 123456
+        MYSQL_ROOT_PASSWORD: ${DOCKER_DATABASE_USER}
       ports:
-        - 9004:80
+        - ${DOCKER_PHPMYADMIN_PORT}:80
       links:
         - db
 
@@ -32,6 +32,6 @@ services:
       dockerfile: .docker/Dockerfile
     image: 'laravelapp'
     ports:
-      - 80:80
+      - ${DOCKER_APACHE_PORT_HTTP}:80
     volumes:
       - ./api:/var/www/html

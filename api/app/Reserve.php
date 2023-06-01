@@ -22,9 +22,4 @@ class Reserve extends Model
         return $this->belongsTo(Court::class);
     }
 
-    public function club()
-    {
-        $this->hasOneThrough(Club::class, Court::class);
-    }
-
 }

@@ -27,9 +27,14 @@ class ReserveController extends Controller
     {
         $page = $request->input('page', 1);
 
-        $reserves = Reserve::whereHas('court',function (Builder $query) {
-            $query->where('created_by_id',Auth::id());
-         })->paginate(10, ['*'], 'page', $page);
+        $reserves = Reserve::select('reserves.*')
+            ->join('courts', 'courts.id', '=', 'reserves.court_id')
+            ->where('courts.created_by_id', Auth::id())
+            ->paginate(10, ['*'], 'page', $page);
+
+//        $reserves = Reserve::whereHas('court',function (Builder $query) {
+//            $query->where('created_by_id',Auth::id());
+//         })
 
         return response()->json($reserves);
     }

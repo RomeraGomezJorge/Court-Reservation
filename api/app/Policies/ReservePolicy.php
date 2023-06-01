@@ -31,7 +31,7 @@ class ReservePolicy
      */
     public function view(User $user, Reserve $reserve)
     {
-        return $user->id == $reserve->club->created_by->id;
+        return $user->id == $reserve->court->created_by->id;
     }
 
     /**
@@ -54,7 +54,7 @@ class ReservePolicy
      */
     public function update(User $user, Reserve $reserve)
     {
-        return $user->id == $reserve->club->created_by->id;
+        return $user->id == $reserve->court->created_by->id;
     }
 
     /**
@@ -66,6 +66,6 @@ class ReservePolicy
      */
     public function delete(User $user, Reserve $reserve)
     {
-        return $user->id == $reserve->club->created_by->id;
+        return $user->id == $reserve->court->created_by->id;
     }
 }
